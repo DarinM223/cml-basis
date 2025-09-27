@@ -1,0 +1,26 @@
+local
+  $(SML_LIB)/basis/basis.mlb
+  $(SML_LIB)/cml/core-cml/core-cml.mlb
+  cleanup.sig
+  cml-cleanup-sig.sml
+  ann "allowOrPats true" in
+    cleanup.sml
+  end
+  prim-io-sig.sml
+  os-prim-io-sig.sml
+  cml-stream-io-sig.sml
+  cml-text-stream-io-sig.sml
+  new-cml-imperative-io-sig.sml
+  ann "allowOrPats true" in
+    clean-io.sml
+  end
+  cml-bin-io-sig.sml
+  new-bin-io-fn.sml
+  chan-io-fn.sml
+  prim-io-fn.sml
+  text-prim-io.sml
+  new-cml-text-io-sig.sml
+  new-text-io-fn.sml
+  bin-prim-io.sml
+in
+end

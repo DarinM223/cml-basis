@@ -53,5 +53,5 @@ signature PRIM_IO =
 	ioDesc      : OS.IO.iodesc option
       }
 
-  end;
+  end
 

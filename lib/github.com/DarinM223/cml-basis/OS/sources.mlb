@@ -1,0 +1,12 @@
+local
+  $(SML_LIB)/basis/basis.mlb
+  $(SML_LIB)/cml/core-cml/core-cml.mlb
+  os-io-sig.sml
+  os-process-sig.sml
+  os-sig.sml
+  os-signatures.sml
+in
+  signature OS_IO
+  signature OS_PROCESS
+  signature OS
+end

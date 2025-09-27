@@ -16,4 +16,4 @@ signature CML_TEXT_STREAM_IO =
     val inputAllEvt  : instream -> (vector * instream) CML.event
     val inputLineEvt : instream -> (vector * instream) option CML.event
 
-  end;
+  end

@@ -54,4 +54,4 @@ signature CML_IMPERATIVE_IO =
     val inputEvt    : instream -> vector CML.event
     val inputAllEvt : instream -> vector CML.event
 
-  end;
+  end

@@ -697,7 +697,7 @@ functor TextIOFn (
 		      lp
 		  end
 	      val writeArr' = iterate (writeArr, AS.length, AS.subslice)
-	      val writeVec' = iterate (writeVec, VS. length, VS.subslice)
+	      val writeVec' = iterate (writeVec, VS.length, VS.subslice)
 	    (* install a dummy cleaner *)
 	      val tag = CleanIO.addCleaner dummyCleaner
 	      val strm = SV.mVarInit (OSTRM{
@@ -921,7 +921,7 @@ functor TextIOFn (
 	    | (SOME(elem, _)) => SOME elem
 	  (* end case *))
     fun closeIn strm = let
-	  val (s as StreamIO.ISTRM(buf as StreamIO.IBUF{data, ...}, _)) =
+	  val (s as StreamIO.ISTRM(buf as StreamIO.IBUF _, _)) =
 		SV.mTake strm
 	  in
 	    StreamIO.closeIn s;
@@ -1056,8 +1056,8 @@ functor TextIOFn (
     val _ = CleanIO.stdStrmHook := (fn () => (
 	  setInstream (stdIn, mkStdIn true);
 	  setOutstream (stdOut, mkStdOut true);
-	  setOutstream (stdErr, mkStdErr true);
-	  SMLofNJ.Internals.prHook := print))
+	  setOutstream (stdErr, mkStdErr true)
+		(* ; SMLofNJ.Internals.prHook := print *)))
     end (* local *)
 
   end (* TextIOFn *)

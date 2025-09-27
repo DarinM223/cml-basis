@@ -645,7 +645,7 @@ functor BinIOFn (
 	fun filePosOut (OUTP{pos, strm=strmMV}) = (
 	      SV.mPut (strmMV, lockAndChkClosedOut (strmMV, "filePosOut"));
 	      pos)
-	fun setPosOut (OUTP{pos, strm=strmMV}) = let
+	fun setPosOut (OUTP{pos, strm=strmMV}) : unit = let
 	      val (strm as OSTRM{writer, ...}) =
 		    lockAndChkClosedOut (strmMV, "setPosOut")
 	      fun release () = SV.mPut(strmMV, strm)

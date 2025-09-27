@@ -1,0 +1,14 @@
+local
+  $(SML_LIB)/basis/basis.mlb
+  $(SML_LIB)/cml/core-cml/core-cml.mlb
+  $(SML_LIB)/cml/cml.mlb
+  ./OS/sources.mlb
+  ./IO/sources.mlb
+  ./Sockets/sources.mlb
+  ./Unix/sources.mlb
+in
+  signature OS_PROCESS
+  signature OS_IO
+  signature OS
+  structure OS
+end

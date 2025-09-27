@@ -90,7 +90,7 @@ structure CleanIO :> sig
 
     fun doClean () = let
 	  fun doit [] = ()
-	    | doit ({tag, close}::r) = ((close()) handle _ => (); doit r)
+	    | doit ({tag = _, close}::r) = ((close()) handle _ => (); doit r)
 	  in
 	    doit (SV.mGet cleaners)
 	  end

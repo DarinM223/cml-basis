@@ -16,7 +16,7 @@ signature CML_OS_PROCESS =
     val isSuccess : status -> bool
 
     val system    : string -> status
-    val systemEvt : string -> status Event.event
+    val systemEvt : string -> status CML.event
 
     val atExit    : (unit -> unit) -> unit
 
