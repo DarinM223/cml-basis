@@ -33,8 +33,6 @@ signature CML_TEXT_IO =
       where type reader = TextPrimIO.reader
       where type writer = TextPrimIO.writer
       where type pos = TextPrimIO.pos
-      where type vector = string
-      where type elem = char
 
 (*
     val getPosIn    : instream -> StreamIO.in_pos

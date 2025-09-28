@@ -23,4 +23,18 @@ local
   new-text-io-fn.sml
   bin-prim-io.sml
 in
+  signature CML_BIN_IO
+  signature CML_IMPERATIVE_IO
+  signature CML_STREAM_IO
+  signature CML_TEXT_IO
+  signature CML_TEXT_STREAM_IO
+  signature OS_PRIM_IO
+  signature PRIM_IO
+  structure BinPrimIO
+  structure CleanIO
+  structure TextPrimIO
+  functor BinIOFn
+  functor ChanIOFn
+  functor PrimIO
+  functor TextIOFn
 end
