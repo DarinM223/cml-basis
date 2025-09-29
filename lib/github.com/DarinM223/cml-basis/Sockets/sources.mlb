@@ -1,0 +1,39 @@
+local
+  $(SML_LIB)/basis/basis.mlb
+  $(SML_LIB)/cml/core-cml/core-cml.mlb
+  pre-sock.sml
+  synchronous-socket.sig
+  cml-socket-sig.sml
+  cml-socket.sml
+
+  rebind1.sml
+
+  (* recompile the SML signatures, so that the types are right *)
+  generic-sock-sig.sml
+  inet-sock-sig.sml
+
+  unix-sock-sig.sml
+
+  cml-generic-sock.sml
+  cml-inet-sock.sml
+
+  cml-unix-sock.sml
+
+  rebind2.sml
+  rebind2-unix-sock.sml
+in
+  signature CML_SOCKET
+  signature GENERIC_SOCK
+  signature INET_SOCK
+  structure Socket
+  structure CML_GenericSock
+  structure CML_INetSock
+
+  signature UNIX_SOCK
+  structure CML_UnixSock
+
+  structure GenericSock
+  structure INetSock
+
+  structure UnixSock
+end
