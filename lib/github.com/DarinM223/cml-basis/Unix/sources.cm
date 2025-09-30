@@ -23,7 +23,7 @@ is
   ../glue/sources.cm
   os.cm
 
-  syscall.sml
+  syscall.smlnj.sml
   os.sml
   posix-bin-prim-io.sml
   posix-bin-io.sml

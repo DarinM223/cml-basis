@@ -7,7 +7,8 @@ structure OS : OS =
   struct
     structure IO = OS_IO
     structure Path = OS.Path
-    structure Process = OS_Process
+    (* structure Process = OS_Process *)
+    structure Process = OS.Process (* TODO: Add process manager to MLton? *)
     structure FileSys = OS.FileSys	(** may need to protect system calls *)
 
     type syserror = OS.syserror
@@ -16,5 +17,6 @@ structure OS : OS =
 
     val errorName = OS.errorName
     val errorMsg = OS.errorMsg
+    val syserror = OS.syserror
 
   end

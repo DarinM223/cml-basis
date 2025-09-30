@@ -14,14 +14,14 @@ local
   ann "allowOrPats true" in
     clean-io.sml
   end
+  prim-io-fn.sml
+  bin-prim-io.sml
   cml-bin-io-sig.sml
   new-bin-io-fn.sml
   chan-io-fn.sml
-  prim-io-fn.sml
   text-prim-io.sml
   new-cml-text-io-sig.sml
   new-text-io-fn.sml
-  bin-prim-io.sml
 in
   signature CML_BIN_IO
   signature CML_IMPERATIVE_IO

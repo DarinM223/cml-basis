@@ -1,0 +1,15 @@
+local
+  $(SML_LIB)/basis/basis.mlb
+  $(SML_LIB)/basis/mlton.mlb
+  $(SML_LIB)/cml/core-cml/core-cml.mlb
+  ../IO/sources.mlb
+  os-io.sml
+  syscall.mlton.sml
+  os.sml
+  posix-bin-prim-io.sml
+  posix-bin-io.sml
+  (* posix-text-prim-io.sml
+  posix-text-io.sml *)
+  (* unix-sig.sml *)
+in
+end
