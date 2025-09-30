@@ -75,4 +75,4 @@ signature CML_TEXT_IO =
 	    -> ('a, StreamIO.instream) StringCvt.reader
 	  ) -> instream -> 'a option
 
-  end;
+  end

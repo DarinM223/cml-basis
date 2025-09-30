@@ -17,7 +17,7 @@
  *
  * Revision 1.1.1.1  1996/01/31  16:02:40  george
  * Version 109
- * 
+ *
  *)
 
 signature UNIX_SOCK =
@@ -43,4 +43,4 @@ signature UNIX_SOCK =
 	val socket     : unit -> dgram_sock
 	val socketPair : unit -> (dgram_sock * dgram_sock)
       end
-  end;
+  end

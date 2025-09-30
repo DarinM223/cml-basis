@@ -208,5 +208,5 @@ structure PosixBinPrimIO : OS_PRIM_IO =
 	    chunkSize	= bufferSzB
 	  }
 
-  end; (* PosixBinPrimIO *)
+  end (* PosixBinPrimIO *)
 

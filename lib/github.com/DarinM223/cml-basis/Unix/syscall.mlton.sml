@@ -33,5 +33,5 @@ structure Syscall : sig
 	    try 3
 	  end
 
-  end;
+  end
 

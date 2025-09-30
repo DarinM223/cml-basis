@@ -5,4 +5,4 @@
  * The implementation of the TextIO stack on Posix systems.
  *)
 
-structure TextIO = TextIOFn (structure OSPrimIO = PosixTextPrimIO);
+structure TextIO = TextIOFn (structure OSPrimIO = PosixTextPrimIO)

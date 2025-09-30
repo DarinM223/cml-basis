@@ -6,4 +6,4 @@
  *
  *)
 
-structure BinIO = BinIOFn (structure OSPrimIO = PosixBinPrimIO);
+structure BinIO = BinIOFn (structure OSPrimIO = PosixBinPrimIO)
