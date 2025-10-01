@@ -10,6 +10,14 @@ local
   posix-bin-io.sml
   posix-text-prim-io.sml
   posix-text-io.sml
-  (* unix-sig.sml *)
 in
+  signature OS_IO
+  signature OS_PROCESS
+
+  structure Syscall
+  structure OS
+  structure BinPrimIO
+  structure BinIO
+  structure TextPrimIO
+  structure TextIO
 end
