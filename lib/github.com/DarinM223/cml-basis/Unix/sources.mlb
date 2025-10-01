@@ -8,8 +8,8 @@ local
   os.sml
   posix-bin-prim-io.sml
   posix-bin-io.sml
-  (* posix-text-prim-io.sml
-  posix-text-io.sml *)
+  posix-text-prim-io.sml
+  posix-text-io.sml
   (* unix-sig.sml *)
 in
 end

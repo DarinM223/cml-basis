@@ -6,6 +6,7 @@ local
   ann "allowOrPats true" in
     cleanup.sml
   end
+  posix-io-extra.sml
   prim-io-sig.sml
   os-prim-io-sig.sml
   cml-stream-io-sig.sml
@@ -33,6 +34,7 @@ in
   structure BinPrimIO
   structure CleanIO
   structure TextPrimIO
+  structure Posix_IO_Extra
   functor BinIOFn
   functor ChanIOFn
   functor PrimIO
