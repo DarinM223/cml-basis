@@ -11,4 +11,15 @@ in
   signature OS_IO
   signature OS
   structure OS
+  signature PRIM_IO
+	structure BinIO
+	structure BinPrimIO
+	structure TextIO
+	structure TextPrimIO
+	signature INET_SOCK
+	signature GENERIC_SOCK
+	structure Socket
+	structure INetSock
+  signature UNIX_SOCK
+	structure UnixSock
 end

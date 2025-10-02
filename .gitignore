@@ -1,2 +1,4 @@
 .cm/
 cml-basis-unix
+examples/tcp-server/tcp-server
+*.amd64-linux
