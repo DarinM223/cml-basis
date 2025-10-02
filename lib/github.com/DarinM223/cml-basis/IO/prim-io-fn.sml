@@ -5,8 +5,7 @@
  *)
 
 functor PrimIO
-  (
-   structure Vector: MONO_VECTOR
+  (structure Vector: MONO_VECTOR
    structure Array: MONO_ARRAY
    structure VectorSlice: MONO_VECTOR_SLICE
    structure ArraySlice: MONO_ARRAY_SLICE

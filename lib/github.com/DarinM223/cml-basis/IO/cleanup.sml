@@ -78,7 +78,7 @@ struct
       val cleanFns =
         (case when of
            (AtInit | AtInitFn) => List.rev (filter (fn w => (w = when)))
-         | _ => filter (fn w => (w = when))(* end case *) )
+         | _ => filter (fn w => (w = when)) (* end case *))
       fun initFnPred AtExit = true
         | initFnPred _ = false
       fun doCleaner (_, _, f) =
@@ -96,7 +96,7 @@ struct
       (* remove uneccesary clean-up routines *)
       case when of
         AtInitFn => hooks := filter initFnPred
-      | _ => ()(* end case *) ;
+      | _ => () (* end case *);
       unlock ();
       (* now apply the clean-up routines *)
       List.app doCleaner cleanFns
@@ -114,7 +114,7 @@ struct
             else
               (case (remove r) of
                  NONE => NONE
-               | SOME (hook', r') => SOME (hook', hook :: r')(* end case *) )
+               | SOME (hook', r') => SOME (hook', hook :: r') (* end case *))
     in
       remove (!hooks)
     end
@@ -123,14 +123,16 @@ struct
   fun addCleaner (arg as (name, _, _)) =
     (case (removeHook name) of
        NONE => (hooks := arg :: !hooks; NONE)
-     | (SOME (oldHook, hookLst)) => (hooks := arg :: hookLst; SOME oldHook)(* end case *) )
+     | (SOME (oldHook, hookLst)) =>
+         (hooks := arg :: hookLst; SOME oldHook) (* end case *))
   val addCleaner = protect addCleaner
 
   (* remove and return the named cleaner; return NONE if it is not found *)
   fun removeCleaner name =
     (case (removeHook name) of
        NONE => NONE
-     | (SOME (oldHook, hookLst)) => (hooks := hookLst; SOME oldHook)(* end case *) )
+     | (SOME (oldHook, hookLst)) =>
+         (hooks := hookLst; SOME oldHook) (* end case *))
   val removeCleaner = protect removeCleaner
 
   exception Unlog

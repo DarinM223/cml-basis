@@ -10,6 +10,7 @@ local
   posix-bin-io.sml
   posix-text-prim-io.sml
   posix-text-io.sml
+  rebind.sml
 in
   signature OS_IO
   signature OS_PROCESS
@@ -20,4 +21,6 @@ in
   structure BinIO
   structure TextPrimIO
   structure TextIO
+  structure OSBinPrimIO
+  structure OSTextPrimIO
 end

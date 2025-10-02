@@ -79,12 +79,13 @@ struct
       CML.guard (fn () =>
         case acceptNB' sock of
           (SOME res) => CML.alwaysEvt res
-        | NONE => CML.wrap ((PreSock.inEvt s), fn _ => accept' sock)(* end case *) )
+        | NONE =>
+            CML.wrap ((PreSock.inEvt s), fn _ => accept' sock) (* end case *))
 
     fun accept (s as PS.CMLSock {sock, ...}) =
       (case acceptNB' sock of
          (SOME res) => res
-       | NONE => (CML.sync (PreSock.inEvt s); accept' sock)(* end case *) )
+       | NONE => (CML.sync (PreSock.inEvt s); accept' sock) (* end case *))
   end (* local *)
 
   fun bind (PS.CMLSock {sock, ...}, addr) = Socket.bind (sock, addr)
@@ -195,43 +196,56 @@ struct
     CML.guard (fn () =>
       case Socket.recvVecNB (sock, n) of
         (SOME res) => CML.alwaysEvt res
-      | NONE => CML.wrap (PS.inEvt s, fn _ => Socket.recvVec (sock, n))(* end case *) )
+      | NONE =>
+          CML.wrap (PS.inEvt s, fn _ => Socket.recvVec (sock, n)) (* end case *))
   fun recvArrEvt (s as PS.CMLSock {sock, ...}, buf) =
     CML.guard (fn () =>
       case Socket.recvArrNB (sock, buf) of
         (SOME res) => CML.alwaysEvt res
-      | NONE => CML.wrap (PS.inEvt s, fn _ => Socket.recvArr (sock, buf))(* end case *) )
+      | NONE =>
+          CML.wrap (PS.inEvt s, fn _ =>
+            Socket.recvArr (sock, buf)) (* end case *))
   fun recvVecEvt' (s as PS.CMLSock {sock, ...}, n, flgs) =
     CML.guard (fn () =>
       case Socket.recvVecNB' (sock, n, flgs) of
         (SOME res) => CML.alwaysEvt res
-      | NONE => CML.wrap (PS.inEvt s, fn _ => Socket.recvVec' (sock, n, flgs))(* end case *) )
+      | NONE =>
+          CML.wrap (PS.inEvt s, fn _ =>
+            Socket.recvVec' (sock, n, flgs)) (* end case *))
   fun recvArrEvt' (s as PS.CMLSock {sock, ...}, buf, flgs) =
     CML.guard (fn () =>
       case Socket.recvArrNB' (sock, buf, flgs) of
         (SOME res) => CML.alwaysEvt res
-      | NONE => CML.wrap (PS.inEvt s, fn _ => Socket.recvArr' (sock, buf, flgs))(* end case *) )
+      | NONE =>
+          CML.wrap (PS.inEvt s, fn _ =>
+            Socket.recvArr' (sock, buf, flgs)) (* end case *))
   fun recvVecFromEvt (s as PS.CMLSock {sock, ...}, n) =
     CML.guard (fn () =>
       case Socket.recvVecFromNB (sock, n) of
         (SOME res) => CML.alwaysEvt res
-      | NONE => CML.wrap (PS.inEvt s, fn _ => Socket.recvVecFrom (sock, n))(* end case *) )
+      | NONE =>
+          CML.wrap (PS.inEvt s, fn _ =>
+            Socket.recvVecFrom (sock, n)) (* end case *))
   fun recvArrFromEvt (s as PS.CMLSock {sock, ...}, buf) =
     CML.guard (fn () =>
       case Socket.recvArrFromNB (sock, buf) of
         (SOME res) => CML.alwaysEvt res
-      | NONE => CML.wrap (PS.inEvt s, fn _ => Socket.recvArrFrom (sock, buf))(* end case *) )
+      | NONE =>
+          CML.wrap (PS.inEvt s, fn _ =>
+            Socket.recvArrFrom (sock, buf)) (* end case *))
   fun recvVecFromEvt' (s as PS.CMLSock {sock, ...}, n, flgs) =
     CML.guard (fn () =>
       case Socket.recvVecFromNB' (sock, n, flgs) of
         (SOME res) => CML.alwaysEvt res
       | NONE =>
-          CML.wrap (PS.inEvt s, fn _ => Socket.recvVecFrom' (sock, n, flgs))(* end case *) )
+          CML.wrap (PS.inEvt s, fn _ =>
+            Socket.recvVecFrom' (sock, n, flgs)) (* end case *))
   fun recvArrFromEvt' (s as PS.CMLSock {sock, ...}, buf, flgs) =
     CML.guard (fn () =>
       case Socket.recvArrFromNB' (sock, buf, flgs) of
         (SOME res) => CML.alwaysEvt res
       | NONE =>
-          CML.wrap (PS.inEvt s, fn _ => Socket.recvArrFrom' (sock, buf, flgs))(* end case *) )
+          CML.wrap (PS.inEvt s, fn _ =>
+            Socket.recvArrFrom' (sock, buf, flgs)) (* end case *))
 
 end

@@ -7,8 +7,7 @@
  *)
 
 functor TextIOFn
-  (
-   structure OSPrimIO:
+  (structure OSPrimIO:
    sig
      include OS_PRIM_IO
      val stdIn: unit -> PrimIO.reader
@@ -143,7 +142,7 @@ struct
           | get NOMORE =
               (case SV.mTake more of
                  NOMORE => extendStream (readFn, mlOp, buf)
-               | next => (SV.mPut (more, next); get next)(* end case *) )
+               | next => (SV.mPut (more, next); get next) (* end case *))
       in
         get (SV.mGet more)
       end
@@ -172,7 +171,7 @@ struct
             else
               (case (getBuf buf) of
                  EOF => (empty, ISTRM (buf, len))
-               | (DATA rest) => get (ISTRM (rest, 0))(* end case *) )
+               | (DATA rest) => get (ISTRM (rest, 0)) (* end case *))
           end
       in
         get
@@ -194,7 +193,7 @@ struct
     fun findEOS (buf as IBUF {more, data, ...}) =
       (case (SV.mGet more) of
          (MORE buf) => findEOS buf
-       | _ => ISTRM (buf, V.length data)(* end case *) )
+       | _ => ISTRM (buf, V.length data) (* end case *))
 
     fun input (strm as ISTRM (buf, _)) =
       generalizedInput (getBuffer (readVec buf, "input")) strm
@@ -214,8 +213,8 @@ struct
                      NOMORE =>
                        (case extendStream (readVec buf, "input1", buf) of
                           EOF => NONE
-                        | (DATA rest) => input1 (ISTRM (rest, 0))(* end case *) )
-                   | next => (SV.mPut (more, next); get next)(* end case *) )
+                        | (DATA rest) => input1 (ISTRM (rest, 0)) (* end case *))
+                   | next => (SV.mPut (more, next); get next) (* end case *))
           in
             get (SV.mGet more)
           end
@@ -243,8 +242,8 @@ struct
                      NOMORE =>
                        (case extendStream (readVec buf, "inputN", buf) of
                           EOF => ([], ISTRM (buf, V.length data))
-                        | (DATA rest) => inputList (rest, 0, n)(* end case *) )
-                   | next => (SV.mPut (more, next); get next)(* end case *) )
+                        | (DATA rest) => inputList (rest, 0, n) (* end case *))
+                   | next => (SV.mPut (more, next); get next) (* end case *))
           in
             get (SV.mGet more)
           end
@@ -266,7 +265,8 @@ struct
               (case avail () of
                  NONE => chunkSzOfIBuf buf
                | (SOME n) =>
-                   if (n > maxInputSz) then raise Size else Position.toInt n(* end case *) )
+                   if (n > maxInputSz) then raise Size
+                   else Position.toInt n (* end case *))
           in
             readChunk buf delta
           end
@@ -343,18 +343,18 @@ struct
                   (NOMORE, false) =>
                     (case extendStream (readVec buf, "endOfStream", buf) of
                        EOF => true
-                     | _ => false(* end case *) )
-                | _ => (SV.mPut (more, next); true)(* end case *) )
+                     | _ => false (* end case *))
+                | _ => (SV.mPut (more, next); true) (* end case *))
              else
                (SV.mPut (more, next); false)
-           end(* end case *) )
+           end (* end case *))
     fun mkInstream' (reader, data) =
       let
         val PIO.RD {readVec, readVecEvt, getPos, setPos, ...} = reader
         val getPos =
           (case (getPos, setPos) of
              (SOME f, SOME _) => (fn () => SOME (f ()))
-           | _ => (fn () => NONE)(* end case *) )
+           | _ => (fn () => NONE) (* end case *))
         val more = SV.mVarInit NOMORE
         val closedFlg = ref false
         val tag = CleanIO.addCleaner dummyCleaner
@@ -389,7 +389,7 @@ struct
         fun getData more =
           (case SV.mGet more of
              (MORE (IBUF {data, more = more', ...})) => data :: getData more'
-           | _ => [](* end case *) )
+           | _ => [] (* end case *))
       in
         terminate info;
         if (pos < V.length data) then
@@ -439,7 +439,7 @@ struct
                             0 =>
                               inputExn
                                 (info, "filePosIn", Fail "bogus position")
-                          | k => readN (n - k)(* end case *) )
+                          | k => readN (n - k) (* end case *))
                  in
                    setPos base;
                    readN pos;
@@ -447,7 +447,7 @@ struct
                  end
              | _ => raise Fail "filePosIn: impossible"
            (* end case *)
-           end(* end case *) )
+           end (* end case *))
     (*
     	fun setPosIn (pos as INP{info as INFO{reader, ...}, ...}) = let
     	      val fpos = filePosIn pos
@@ -473,8 +473,8 @@ struct
                      NOMORE =>
                        (case extendStream (readVec buf, "inputLine", buf) of
                           EOF => last ()
-                        | (DATA rest) => scanData (rest, 0)(* end case *) )
-                   | next => (SV.mPut (more, next); get next)(* end case *) )
+                        | (DATA rest) => scanData (rest, 0) (* end case *))
+                   | next => (SV.mPut (more, next); get next) (* end case *))
               | get TERMINATED = last ()
           in
             get (SV.mGet more)
@@ -569,14 +569,14 @@ struct
       (case SV.mTake strmMV of
          (strm as OSTRM ({closed = ref true, ...})) =>
            (SV.mPut (strmMV, strm); outputExn (strm, mlOp, IO.ClosedStream))
-       | strm => strm(* end case *) )
+       | strm => strm (* end case *))
 
     fun flushBuffer (strmMV, strm as OSTRM {buf, pos, writeArr, ...}, mlOp) =
       (case !pos of
          0 => ()
        | n =>
            ((writeArr (AS.slice (buf, 0, SOME n)); pos := 0)
-            handle ex => (SV.mPut (strmMV, strm); outputExn (strm, mlOp, ex)))(* end case *) )
+            handle ex => (SV.mPut (strmMV, strm); outputExn (strm, mlOp, ex))) (* end case *))
 
     (* A version of copyVec that checks for newlines, while it is copying.
      * This is used for LINE_BUF output of strings and substrings.
@@ -658,7 +658,7 @@ struct
         case !bufferMode of
           IO.NO_BUF => writeDirect ()
         | IO.LINE_BUF => insert lineBufCopyVec
-        | IO.BLOCK_BUF => insert blockBufCopyVec(* end case *) ;
+        | IO.BLOCK_BUF => insert blockBufCopyVec (* end case *);
         release ()
       end
 
@@ -695,7 +695,7 @@ struct
               pos := i';
               if (i' = A.length buf) then flushBuffer (strmMV, strm, "output1")
               else ()
-            end(* end case *) ;
+            end (* end case *);
         release ()
       end
 
@@ -796,7 +796,7 @@ struct
         | _ =>
             ( release ()
             ; outputExn (strm, "getPosOut", IO.RandomAccessNotSupported)
-            )(* end case *) ;
+            ) (* end case *);
         release ();
         strmMV
       end
@@ -879,7 +879,7 @@ struct
         case !bufferMode of
           IO.NO_BUF => writeDirect ()
         | IO.LINE_BUF => insert lineBufCopyVec
-        | IO.BLOCK_BUF => insert blockBufCopyVec(* end case *) ;
+        | IO.BLOCK_BUF => insert blockBufCopyVec (* end case *);
         release ()
       end
 
@@ -898,7 +898,7 @@ struct
   fun input1 strm =
     (case StreamIO.input1 (SV.mTake strm) of
        NONE => NONE
-     | (SOME (elem, strm')) => (SV.mPut (strm, strm'); SOME elem)(* end case *) )
+     | (SOME (elem, strm')) => (SV.mPut (strm, strm'); SOME elem) (* end case *))
   fun inputN (strm, n) =
     let val (v, strm') = StreamIO.inputN (SV.mTake strm, n)
     in SV.mPut (strm, strm'); v
@@ -967,7 +967,7 @@ struct
   fun lookahead (strm: instream) =
     (case StreamIO.input1 (SV.mGet strm) of
        NONE => NONE
-     | (SOME (elem, _)) => SOME elem(* end case *) )
+     | (SOME (elem, _)) => SOME elem (* end case *))
   fun closeIn strm =
     let val (s as StreamIO.ISTRM (buf as StreamIO.IBUF _, _)) = SV.mTake strm
     in StreamIO.closeIn s; SV.mPut (strm, StreamIO.findEOS buf)

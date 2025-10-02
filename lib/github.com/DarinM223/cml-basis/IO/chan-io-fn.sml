@@ -86,7 +86,7 @@ struct
                    , CML.wrap (CML.sendEvt (replCh, v), fn () => server NONE)
                    ]
              end
-         | CLOSE => (SV.iPut (closedFlg, ()); closedServer ())(* end case *) )
+         | CLOSE => (SV.iPut (closedFlg, ()); closedServer ()) (* end case *))
       and closedServer () =
         (ignore (Mailbox.recv reqCh); closedServer ())
     in
