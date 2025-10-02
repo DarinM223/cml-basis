@@ -5,5 +5,5 @@
  * Rebind the Socket structure
  *)
 
-structure Socket = (* CML_Socket *) struct open CML_Socket end
-
+structure Socket = (* CML_Socket *)
+struct open CML_Socket end

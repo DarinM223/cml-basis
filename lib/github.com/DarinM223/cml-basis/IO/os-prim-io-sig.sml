@@ -10,26 +10,18 @@
  *)
 
 signature OS_PRIM_IO =
-  sig
-    structure PrimIO : PRIM_IO
+sig
+  structure PrimIO: PRIM_IO
 
-    type file_desc
+  type file_desc
 
-    val openRd  : string -> PrimIO.reader
-    val openWr  : string -> PrimIO.writer
-    val openApp : string -> PrimIO.writer
+  val openRd: string -> PrimIO.reader
+  val openWr: string -> PrimIO.writer
+  val openApp: string -> PrimIO.writer
 
-    val mkReader : {
-	    fd : file_desc,
-	    name : string
-	  } -> PrimIO.reader
+  val mkReader: {fd: file_desc, name: string} -> PrimIO.reader
 
-    val mkWriter: {
-	    fd : file_desc,
-	    name : string,
-	    appendMode : bool,
-	    chunkSize : int
-	  } -> PrimIO.writer
+  val mkWriter: {fd: file_desc, name: string, appendMode: bool, chunkSize: int}
+                -> PrimIO.writer
 
-  end
-
+end

@@ -4,18 +4,17 @@
  *)
 
 signature CML_OS =
-  sig
-    type syserror
+sig
+  type syserror
 
-    val errorName : syserror -> string
-    val errorMsg : syserror -> string
+  val errorName: syserror -> string
+  val errorMsg: syserror -> string
 
-    exception SysErr of (string * syserror option)
+  exception SysErr of (string * syserror option)
 
-    structure FileSys : OS_FILE_SYS
-    structure Path : OS_PATH
-    structure Process : CML_OS_PROCESS
-    structure IO : CML_OS_IO
+  structure FileSys: OS_FILE_SYS
+  structure Path: OS_PATH
+  structure Process: CML_OS_PROCESS
+  structure IO: CML_OS_IO
 
-  end
-
+end

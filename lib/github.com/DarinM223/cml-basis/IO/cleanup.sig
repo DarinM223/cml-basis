@@ -15,25 +15,23 @@
  *)
 
 signature CLEAN_UP =
-  sig
+sig
 
-    datatype when = AtExportML | AtExportFn | AtExit | AtInit | AtInitFn
+  datatype when = AtExportML | AtExportFn | AtExit | AtInit | AtInitFn
 
-    val atAll : when list
-	(* at all times *)
+  val atAll: when list
+  (* at all times *)
 
-    val addCleaner    : (string * when list * (when -> unit))
-	  -> (when list * (when -> unit)) option
-	(* add the named cleaner.  This returns the previous definition, or NONE. *)
+  val addCleaner: (string * when list * (when -> unit))
+                  -> (when list * (when -> unit)) option
+  (* add the named cleaner.  This returns the previous definition, or NONE. *)
 
-    val removeCleaner : string -> (when list * (when -> unit)) option
-	(* remove and return the named cleaner; return NONE if it is not found *)
+  val removeCleaner: string -> (when list * (when -> unit)) option
+  (* remove and return the named cleaner; return NONE if it is not found *)
 
-    val clean : when -> unit
-	(* perform the clean-up actions for the specified time.  This function
-	 * should only be called if you really know what you are doing!!
-	 *)
+  val clean: when -> unit
+(* perform the clean-up actions for the specified time.  This function
+ * should only be called if you really know what you are doing!!
+ *)
 
-  end (* CLEAN_UP *)
-
-
+end (* CLEAN_UP *)

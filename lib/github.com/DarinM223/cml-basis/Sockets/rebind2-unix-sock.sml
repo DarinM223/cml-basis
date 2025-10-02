@@ -6,4 +6,5 @@
  *)
 
 
-structure UnixSock = (* CML_UnixSock *) struct open CML_UnixSock end
+structure UnixSock = (* CML_UnixSock *)
+struct open CML_UnixSock end

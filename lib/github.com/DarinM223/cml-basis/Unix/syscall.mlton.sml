@@ -7,31 +7,34 @@
  * module implements mechanisms to protect against this problem.
  *)
 
-structure Syscall : sig
+structure Syscall:
+sig
 
-    val isIntr : OS.syserror -> bool
+  val isIntr: OS.syserror -> bool
 
-    val doSyscall : ('a -> 'b) -> 'a -> 'b
-	(* do a system call, and restart if it is interrupted *)
+  val doSyscall: ('a -> 'b) -> 'a -> 'b
+  (* do a system call, and restart if it is interrupted *)
 
-    val doAtomicSyscall : ('a -> 'b) -> 'a -> 'b
-	(* do a system call with timer signals masked *)
+  val doAtomicSyscall: ('a -> 'b) -> 'a -> 'b
+(* do a system call with timer signals masked *)
 
-  end = struct
+end =
+struct
 
-    fun isIntr err = (err = Posix.Error.intr)
+  fun isIntr err = (err = Posix.Error.intr)
 
-    fun doAtomicSyscall f x =
-      MLton.Thread.atomically (fn () => f x)
+  fun doAtomicSyscall f x =
+    MLton.Thread.atomically (fn () => f x)
 
-    fun doSyscall f x = let
-	  fun try 0 = doAtomicSyscall f x
-	    | try n = ((f x)
-		handle (ex as OS.SysErr(_, SOME err)) =>
-		  if isIntr err then try(n-1) else raise ex)
-	  in
-	    try 3
-	  end
+  fun doSyscall f x =
+    let
+      fun try 0 = doAtomicSyscall f x
+        | try n =
+            ((f x)
+             handle (ex as OS.SysErr (_, SOME err)) =>
+               if isIntr err then try (n - 1) else raise ex)
+    in
+      try 3
+    end
 
-  end
-
+end
