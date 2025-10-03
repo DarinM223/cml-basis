@@ -1,4 +1,5 @@
 .cm/
 cml-basis-unix
 examples/tcp-server/tcp-server
+examples/echo-timeout/echo-timeout
 *.amd64-linux

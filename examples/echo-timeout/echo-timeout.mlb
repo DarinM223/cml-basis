@@ -1,0 +1,7 @@
+$(SML_LIB)/basis/basis.mlb
+$(SML_LIB)/basis/mlton.mlb
+$(SML_LIB)/cml/cml.mlb
+ann "milletDiagnosticsIgnore all" in
+  ../../lib/github.com/DarinM223/cml-basis/Unix/sources.mlb
+end
+main.sml
